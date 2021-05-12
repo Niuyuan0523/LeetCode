@@ -1,0 +1,33 @@
+解题思路
+类似于广度优先搜索的思想，依次把要删除的节点及其子结点放入队列中，弹出意味着删除，压入结果栈中。
+
+代码
+
+/**
+ * @param {number[]} pid
+ * @param {number[]} ppid
+ * @param {number} kill
+ * @return {number[]}
+ */
+var killProcess = function(pid, ppid, kill) {
+    // 类似于广度优先搜索
+    // 把要删除的节点及其子结点依次放入队列中即可
+    let res = [];
+    let queue = [];
+    queue.push(kill);
+    while (queue.length){
+        let cur = queue.shift();
+        res.push(cur);
+        for (let i = 0; i < ppid.length; i++){
+            if (ppid[i] === cur){
+                queue.push(pid[i]);
+            }
+        }
+    }
+    return res;
+};
+
+作者：zpadger
+链接：https://leetcode-cn.com/problems/kill-process/solution/dui-lie-si-lu-jie-jue-gai-wen-ti-by-zpadger/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
